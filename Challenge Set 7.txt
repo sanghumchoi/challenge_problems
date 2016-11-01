@@ -1,0 +1,29 @@
+Challenge Set 7
+Steve Choi
+
+7.1
+select * from customers where country = "UK";
+
+7.2
+select customers.customername, count(orders.orderid) as ordercount from customers inner join orders on customers.customerid = orders.customerid group by customers.customername;
+
+7.3
+select suppliers.suppliername, avg(products.price) as prodaverage from suppliers inner join products on suppliers.supplierid = products.supplierid group by suppliers.suppliername;
+
+7.4
+select count(distinct country) from customers;
+
+7.5
+select categories.categoryname, count(*) as categorycount from products inner join categories on products.categoryid = categories.categoryid inner join orderdetails on products.productid = orderdetails.productid group by categories.categoryname
+
+7.6
+select orderdetails.orderid, (orderdetails.quantity * products.price) as totalcost from orderdetails inner join products on orderdetails.productid = products.productid;
+
+7.7
+select employees.lastname, sum(cost.totalcost) from employees inner join orders on employees.employeeid = orders.employeeid inner join (select orderdetails.orderid, (orderdetails.quantity * products.price) as totalcost from orderdetails inner join products on orderdetails.productid = products.productid) as cost on orders.orderid = cost.orderid group by employees.lastname
+
+7.8
+select count(*) as educount from employees where notes like "%bs%" or "%ba%" or "%ph.d%" or "%ma%" or "%ms%";
+
+7.9
+select suppliers.suppliername, avg(products.productid) as avgprice from suppliers inner join products on suppliers.supplierid = products.supplierid group by suppliers.suppliername having count(products.productid) > 2;
